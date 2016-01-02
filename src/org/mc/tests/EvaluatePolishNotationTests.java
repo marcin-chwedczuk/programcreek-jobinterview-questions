@@ -82,7 +82,18 @@ public class EvaluatePolishNotationTests {
                 },
 
                 // test complex expressions
-                // TODO:
+                {
+                        new String[] { "3", "5", "7", "+", "*" },
+                        36
+                },
+                {
+                        new String[] { "1", "-1", "+", "5", "-" },
+                        -5
+                },
+                {
+                        new String[] { "1", "2", "+", "3", "4", "*", "+" },
+                        15
+                }
         };
     }
 }
