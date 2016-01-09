@@ -23,7 +23,7 @@ public class FirstMissingPositive {
                 return (i+1);
         }
 
-            return 0;
+        return 0;
     }
 
     private boolean canIndex(int[] array, int index) {
