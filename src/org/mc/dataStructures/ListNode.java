@@ -1,5 +1,9 @@
 package org.mc.dataStructures;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ListNode {
     public int value;
     public ListNode next;
@@ -47,5 +51,24 @@ public class ListNode {
         }
 
         return head;
+    }
+
+    public static ListNode fromIndexPointers(int[] indexPointers) {
+        if (indexPointers.length == 0)
+            return null;
+
+        Map<Integer, ListNode> nodes = new HashMap<>();
+
+        for (int i = 0; i < indexPointers.length; i++) {
+            nodes.put(i, new ListNode(i));
+        }
+
+        for (int i = 0; i < indexPointers.length; i++) {
+            nodes.get(i).next = indexPointers[i] == -1
+                    ? null
+                    : nodes.get(indexPointers[i]);
+        }
+
+        return nodes.get(0);
     }
 }

@@ -45,4 +45,19 @@ public class ListNodeTests {
 
         Assert.assertEquals(ListNode.listToString(null), "[]");
     }
+
+
+    @Test
+    public void fromIndexedPointers_works() {
+        int[] ip = { 1, 2, 3, 2 };
+
+        ListNode head = ListNode.fromIndexPointers(ip);
+
+        ListNode first = head;
+        ListNode second = first.next;
+        ListNode third = second.next;
+        ListNode forth = third.next;
+
+        Assert.assertEquals(forth.next, third);
+    }
 }
