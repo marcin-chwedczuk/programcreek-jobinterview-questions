@@ -27,6 +27,23 @@ public class Merge2SortedListsTests {
         );
     }
 
+    @Test(dataProvider = "merge2lists")
+    public void mergeKsorted_lists_works(int[] leftList, int[] rightList, int[] expectedResult) {
+        ListNode actualMerged = new Merge2SortedLists().mergeK(
+                Arrays.asList(
+                    ListNode.create(leftList),
+                    ListNode.create(rightList))
+        );
+
+        ListNode expectedMerged = ListNode.create(expectedResult);
+
+        Assert.assertEquals(
+                ListNode.listToString(actualMerged),
+                ListNode.listToString(expectedMerged),
+                String.format("failed for left: %s and right: %s", Arrays.toString(leftList), Arrays.toString(rightList))
+        );
+    }
+
     @DataProvider(name = "merge2lists")
     public Object[][] merge2listsDataProvider() {
         return new Object[][] {
