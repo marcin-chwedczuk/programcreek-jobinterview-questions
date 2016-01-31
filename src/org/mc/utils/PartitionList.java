@@ -25,11 +25,6 @@ public class PartitionList {
 
         lowerTail.next = upperTail.next = null;
 
-        if (lower == lowerTail)
-            return upper.next;
-        else if (upper == upperTail)
-            return lower.next;
-
         // skip fake heads
         lowerTail.next = upper.next;
         return lower.next;
