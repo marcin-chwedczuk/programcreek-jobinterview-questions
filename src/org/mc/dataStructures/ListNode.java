@@ -21,6 +21,50 @@ public class ListNode {
         return (next == null);
     }
 
+    public ListNode setTail(ListNode newTail) {
+        ListNode last = this;
+
+        while (last.next != null)
+            last = last.next;
+
+        last.next = newTail;
+        return this;
+    }
+
+    public ListNode reverse() {
+        ListNode prev = null;
+        ListNode curr = this;
+
+        while (curr != null) {
+            ListNode tmp = curr.next;
+
+            curr.next = prev;
+            prev = curr;
+
+            curr = tmp;
+        }
+
+        return prev;
+    }
+
+    public int count() {
+        int count = 0;
+
+        for (ListNode c = this; c != null; c = c.next)
+            count++;
+
+        return count;
+    }
+
+    public ListNode atIndex(int cIndex) {
+        ListNode c = this;
+
+        for (int i = 0; i < cIndex; i++)
+            c = c.next;
+
+        return c;
+    }
+
     @Override
     public String toString() {
         return String.format("[%d]", value);
@@ -71,4 +115,5 @@ public class ListNode {
 
         return nodes.get(0);
     }
+
 }
