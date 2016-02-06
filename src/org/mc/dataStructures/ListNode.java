@@ -18,7 +18,11 @@ public class ListNode {
     }
 
     public boolean isTail() {
-        return (next == null);
+        return !hasNext();
+    }
+
+    public boolean hasNext() {
+        return (next != null);
     }
 
     public ListNode setTail(ListNode newTail) {
