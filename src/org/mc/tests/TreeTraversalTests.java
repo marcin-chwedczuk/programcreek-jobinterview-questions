@@ -121,4 +121,58 @@ public class TreeTraversalTests {
                 }
         };
     }
+
+    @Test(dataProvider = "postorderTreeTraversal")
+    public void tree_traversal_postorder_works(String treeText, int[] expectedOrder) {
+        final List<Integer> order = new ArrayList<>();
+
+        new TreeTraversal().postorder(TreeNode.treeFromString(treeText), new IntVisitor() {
+            @Override
+            public void accept(int value) {
+                order.add(value);
+            }
+        });
+
+        int[] actual = ArrayUtils.toPrimitive(order.toArray(new Integer[0]));
+
+        Assert.assertEquals(
+                Arrays.toString(actual),
+                Arrays.toString(expectedOrder),
+                "failed for tree: " + treeText);
+    }
+
+    @DataProvider(name = "postorderTreeTraversal")
+    public Object[][] postorderTreeTraversalProvider() {
+        return new Object[][] {
+                {
+                        // single element
+                        "(3 nil nil)",
+                        new int[] { 3 }
+                },
+
+                {
+                        // degenerated tree left
+                        "(3 (4 (5 nil nil) nil) nil)",
+                        new int[] { 5, 4, 3 }
+                },
+
+                {
+                        // degenerated tree right
+                        "(3 nil (4 nil (5 nil nil)))",
+                        new int[] { 5, 4, 3 }
+                },
+
+                {
+                        // balanced tree
+                        "(3 (4 nil nil) (5 nil nil))",
+                        new int[] { 4, 5, 3 }
+                },
+
+                {
+                        // unbalanced tree
+                        "(3 (4 nil nil) (5 (6 (7 nil nil) nil) (8 nil nil)))",
+                        new int[] { 4, 7, 6, 8, 5, 3 }
+                }
+        };
+    }
 }

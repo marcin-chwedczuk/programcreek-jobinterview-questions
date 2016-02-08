@@ -55,4 +55,34 @@ public class TreeTraversal {
             }
         }
     }
+
+    public void postorder(TreeNode root, IntVisitor visitor) {
+        if (root == null)
+            return;
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        TreeNode lastVisited = null;
+
+        while (!stack.isEmpty()) {
+            TreeNode top = stack.peek();
+
+            // order is important
+            if ((!top.hasLeft() && !top.hasRight()) ||
+                (top.hasRight() && top.right == lastVisited) ||
+                (top.hasLeft() && top.left == lastVisited && !top.hasRight()))
+            {
+                visitor.accept(top.value);
+                lastVisited = top;
+                stack.pop();
+            }
+            else if (top.hasRight() && (!top.hasLeft() || top.left == lastVisited)) {
+                stack.push(top.right);
+            }
+            else if (top.hasLeft() && top.left != lastVisited) {
+                stack.push(top.left);
+            }
+        }
+    }
 }
