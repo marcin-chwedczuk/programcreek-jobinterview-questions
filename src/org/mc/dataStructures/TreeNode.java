@@ -15,6 +15,14 @@ public class TreeNode {
         this.right = right;
     }
 
+    public boolean hasRight() {
+        return (right != null);
+    }
+
+    public boolean hasLeft() {
+        return (left != null);
+    }
+
     // (value left right) (1 (3 nil) (7 (2 nil nil) (3 nil nil)))
     public static String treeToString(TreeNode tree) {
         StringBuilder builder = new StringBuilder();
