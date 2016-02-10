@@ -45,7 +45,7 @@ public class TreeNodeDeserializer {
     private boolean isNil() {
         int endIndex = pos + "nil".length();
 
-        if (endIndex < text.length() && text.substring(pos, endIndex).equals("nil"))
+        if (endIndex <= text.length() && text.substring(pos, endIndex).equals("nil"))
             return true;
 
         return false;
