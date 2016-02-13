@@ -4,6 +4,8 @@ import org.mc.dataStructures.TreeNode;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 public class TreeNodeTests {
     @Test
     public void treeToString_works() {
@@ -23,5 +25,27 @@ public class TreeNodeTests {
         TreeNode root = TreeNode.treeFromString(text);
 
         Assert.assertEquals(TreeNode.treeToString(root), text);
+    }
+
+    @Test
+    public void inorder_works() {
+        String text = "(3 (7 nil nil) (8 (9 nil nil) (10 nil nil)))";
+
+        int[] values = TreeNode.treeFromString(text).inorder();
+
+        Assert.assertEquals(
+                Arrays.toString(values),
+                Arrays.toString(new int[] { 7, 3, 9, 8, 10 }));
+    }
+
+    @Test
+    public void postorder_works() {
+        String text = "(3 (7 nil nil) (8 (9 nil nil) nil))";
+
+        int[] values = TreeNode.treeFromString(text).postorder();
+
+        Assert.assertEquals(
+                Arrays.toString(values),
+                Arrays.toString(new int[] { 7, 9, 8, 3 }));
     }
 }
