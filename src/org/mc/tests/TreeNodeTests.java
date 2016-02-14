@@ -40,12 +40,12 @@ public class TreeNodeTests {
 
     @Test
     public void postorder_works() {
-        String text = "(3 (7 nil nil) (8 (9 nil nil) nil))";
+        String text = "(3 (7 nil nil) (8 (-9 nil nil) nil))";
 
         int[] values = TreeNode.treeFromString(text).postorder();
 
         Assert.assertEquals(
                 Arrays.toString(values),
-                Arrays.toString(new int[] { 7, 9, 8, 3 }));
+                Arrays.toString(new int[] { 7, -9, 8, 3 }));
     }
 }

@@ -71,16 +71,28 @@ public class TreeNodeDeserializer {
             error("unexpected end of input, expecting digit");
 
         int num = 0;
+        int sign = 1;
+        boolean first = true;
 
-        while (Character.isDigit(text.charAt(pos))) {
-            num = num * 10 + (text.charAt(pos)-'0');
+        while (Character.isDigit(text.charAt(pos)) || text.charAt(pos) == '-') {
+            if (text.charAt(pos) == '-') {
+                if (!first)
+                    error("invalid number: minus sign in wrong place");
+
+                sign = -1;
+            }
+            else {
+                num = num * 10 + (text.charAt(pos) - '0');
+            }
+
+            first = false;
 
             pos++;
             if (pos >= text.length())
                 break;
         }
 
-        return num;
+        return sign*num;
     }
 
     private void error(String message) {
