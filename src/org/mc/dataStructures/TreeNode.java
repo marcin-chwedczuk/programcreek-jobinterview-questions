@@ -11,6 +11,9 @@ public class TreeNode {
     public TreeNode left;
     public TreeNode right;
 
+    // optional pointer to next node on the right on same level in tree
+    public TreeNode next;
+
     public TreeNode(int value) {
         this.value = value;
     }
