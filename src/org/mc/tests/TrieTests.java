@@ -1,5 +1,6 @@
 package org.mc.tests;
 
+import com.sun.xml.internal.ws.policy.AssertionSet;
 import org.mc.utils.Trie;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -63,5 +64,31 @@ public class TrieTests {
 
         Assert.assertEquals(trie.startsWith("c"), false);
         Assert.assertEquals(trie.startsWith("dumpty"), false);
+    }
+
+    @Test
+    public void match_returns_true_if_trie_contains_string_matching_simplified_regex() {
+        // simplified regex letters: a-z and '.' operator
+
+        trie.add("foooz");
+        trie.add("foo");
+        trie.add("moo");
+        trie.add("xox");
+
+        Assert.assertEquals(trie.match("f...z"), true);
+        Assert.assertEquals(trie.match("f....z"), false);
+        Assert.assertEquals(trie.match("f.z"), false);
+        Assert.assertEquals(trie.match(".oo.z"), true);
+        Assert.assertEquals(trie.match("foooz"), true);
+
+        Assert.assertEquals(trie.match(".ox"), true);
+        Assert.assertEquals(trie.match(".o."), true);
+        Assert.assertEquals(trie.match("xox"), true);
+        Assert.assertEquals(trie.match("m.o"), true);
+        Assert.assertEquals(trie.match("d.."), false);
+        Assert.assertEquals(trie.match("d."), false);
+        Assert.assertEquals(trie.match("."), false);
+        Assert.assertEquals(trie.match("..."), true);
+        Assert.assertEquals(trie.match(""), false);
     }
 }

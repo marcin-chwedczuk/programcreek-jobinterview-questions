@@ -1,5 +1,7 @@
 package org.mc.utils;
 
+import org.mc.dataStructures.TreeNode;
+
 public class Trie {
     private static final int CHILDREN_COUNT = ('z' - 'a' + 1);
 
@@ -54,6 +56,40 @@ public class Trie {
         }
 
         return curr;
+    }
+
+    public boolean match(String string) {
+        if (string == null) {
+            throw new IllegalArgumentException("string cannot be empty");
+        }
+
+        return matchImpl(_root, string, 0) != null;
+    }
+
+    private TrieNode matchImpl(TrieNode node, String string, int currIndex) {
+        if (string.length() == currIndex) {
+            return node.isLeaf ? node : null;
+        }
+
+        char c = string.charAt(currIndex);
+        if (c == '.') {
+            for (TrieNode child : node.children) {
+                if (child == null) continue;
+
+                TrieNode tmp = matchImpl(child, string, currIndex+1);
+                if (tmp != null)
+                    return tmp;
+            }
+
+            return null;
+        }
+        else {
+            node = node.getChildFor(c, false);
+            if (node == null)
+                return null;
+            else
+                return matchImpl(node, string, currIndex+1);
+        }
     }
 
     private static class TrieNode {
