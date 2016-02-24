@@ -1,5 +1,6 @@
 package org.mc.tests;
 
+import org.mc.dataStructures.Subarray;
 import org.mc.utils.MaximumSubarray;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -10,7 +11,7 @@ import java.util.Arrays;
 public class MaximumSubarrayTests {
     @Test(dataProvider = "maximumSubarray")
     public void maximum_subarray_works(int[] array, int subarrayStart, int subarrayEnd) {
-        MaximumSubarray.Subarray subarray = MaximumSubarray.find(array);
+        Subarray subarray = MaximumSubarray.find(array);
 
         String failMessage = "failed for array: " + Arrays.toString(array);
         Assert.assertEquals(subarray.toString(), subarrayStart + " " + subarrayEnd, failMessage);
@@ -57,7 +58,8 @@ public class MaximumSubarrayTests {
                 {
                         new int[] { -1, -2, 5, -2 },
                         2, 3
-                }
+                },
+
         };
     }
 }

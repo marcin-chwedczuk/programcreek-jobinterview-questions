@@ -1,47 +1,26 @@
 package org.mc.utils;
 
+import org.mc.dataStructures.Subarray;
+
 public class MaximumSubarray {
-
     public static Subarray find(int[] numbers) {
-        int sum = numbers[0], start = 0, end = 1;
-        int max = sum, maxStart = start, maxEnd = end;
+        int sum = numbers[0], start = 0;
+        int max = sum, maxStart = start, maxEnd = start+1;
 
-        while (end != numbers.length) {
-            if (sum < 0 && start < end) {
-                sum -= numbers[start];
-                start++;
-            }
-            else {
-                sum += numbers[end];
-                end++;
+        for (int i = 1; i < numbers.length; i++) {
+            sum += numbers[i];
+            if (sum <= numbers[i]) {
+                start = i;
+                sum = numbers[i];
             }
 
-            if (sum > max && start < end) {
-                maxStart = start;
-                maxEnd = end;
+            if (max < sum) {
                 max = sum;
+                maxStart = start;
+                maxEnd = i+1;
             }
         }
-
-        // skip zeros
-        while (maxStart < maxEnd-1 && numbers[maxStart] == 0) maxStart++;
-        while (maxStart < maxEnd-1 && numbers[maxEnd-1] == 0) maxEnd--;
 
         return new Subarray(maxStart, maxEnd);
-    }
-
-    public static class Subarray {
-        public int start;
-        public int end;
-
-        public Subarray(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-
-        @Override
-        public String toString() {
-            return start + " " + end;
-        }
     }
 }
