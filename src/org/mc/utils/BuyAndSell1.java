@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 public class BuyAndSell1 {
     /*
      * Tested using: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
-     * 
+     *
      */
     public int maxProfit(int[] prices) {
         if (prices.length == 0)
